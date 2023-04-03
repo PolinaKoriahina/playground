@@ -14,44 +14,43 @@ jobs:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
           curl -H "Content-Type: application/json" -d '{
-  "@type": "MessageCard",
-  "@context": "http://schema.org/extensions",
-  "themeColor": "0076D7",
-  "summary": "Example message summary",
-  "sections": [
-    {
-      "activityTitle": "Example header title",
-      "activitySubtitle": "Example header subtitle",
-      "activityImage": "https://example.com/header-image.png",
-      "facts": [
-        {
-          "name": "Fact 1",
-          "value": "Value 1"
-        },
-        {
-          "name": "Fact 2",
-          "value": "Value 2"
-        }
-      ],
-      "text": "- Bullet 1\n- Bullet 2\n- Bullet 3"
-    },
-    {
-      "title": "Example table title",
-      "facts": [
-        {
-          "name": "Column 1",
-          "value": "Value 1"
-        },
-        {
-          "name": "Column 2",
-          "value": "Value 2"
-        },
-        {
-          "name": "Column 3",
-          "value": "Value 3"
-        }
-      ]
-    }
-  ]
-}
-' $TEAMS_WEBHOOK_URL
+          "@type": "MessageCard",
+          "@context": "http://schema.org/extensions",
+          "themeColor": "0076D7",
+          "summary": "Example message summary",
+          "sections": [
+            {
+              "activityTitle": "Example header title",
+              "activitySubtitle": "Example header subtitle",
+              "activityImage": "https://example.com/header-image.png",
+              "facts": [
+                {
+                  "name": "Fact 1",
+                  "value": "Value 1"
+                },
+                {
+                  "name": "Fact 2",
+                  "value": "Value 2"
+                }
+              ],
+              "text": "- Bullet 1\n- Bullet 2\n- Bullet 3"
+            },
+            {
+              "title": "Example table title",
+              "facts": [
+                {
+                  "name": "Column 1",
+                  "value": "Value 1"
+                },
+                {
+                  "name": "Column 2",
+                  "value": "Value 2"
+                },
+                {
+                  "name": "Column 3",
+                  "value": "Value 3"
+                }
+              ]
+            }
+          ]
+        }' $TEAMS_WEBHOOK_URL
