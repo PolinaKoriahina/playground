@@ -17,3 +17,4 @@ jobs:
           print(re.search("Status: (.*?)<", open(fname, 'r', encoding='utf-8').read()).group(1))
           EOF)
           echo "script_output=$output" >> $GITHUB_OUTPUT
+          echo $output
