@@ -1,9 +1,6 @@
 name: Send Teams notification
 
-on:
-  workflow_run:
-    workflows: [Teams notification]
-    types: [completed]
+on: [workflow_dispatch]
 
 jobs:
   send_notification:
