@@ -1,0 +1,22 @@
+name: Send Teams notification
+
+on:
+  workflow_run:
+    workflows: [Teams notification]
+    types: [completed]
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Teams notification
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          curl -H "Content-Type: application/json" -d '{
+            "@context": "http://schema.org/extensions",
+            "@type": "MessageCard",
+            "themeColor": "0072C6",
+            "title": "GitHub Action workflow completed",
+            "text": "Your GitHub Action workflow has completed."
+          }' $TEAMS_WEBHOOK_URL
