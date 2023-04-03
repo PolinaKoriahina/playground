@@ -10,6 +10,7 @@ jobs:
         uses: actions/checkout@v2   
         
       - name: Run Python script
+        id: message 
         run: |
           output=$(python ./extracts_status.py)
           echo "script_output=$output" >> $GITHUB_OUTPUT
@@ -19,4 +20,4 @@ jobs:
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
-          curl -H "Content-Type: application/json" -d '$script_output' $TEAMS_WEBHOOK_URL
+          curl -H "Content-Type: application/json" -d '${{ steps.message.outputs.script_output }}' $TEAMS_WEBHOOK_URL
