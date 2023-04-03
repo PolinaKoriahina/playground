@@ -20,4 +20,4 @@ jobs:
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
-          curl -H "Content-Type: application/json" -d '${{ steps.message.outputs.script_output }}' $TEAMS_WEBHOOK_URL
+          curl -H "Content-Type: application/json" -d '{'@type': 'MessageCard', '@context': 'http://schema.org/extensions', 'themeColor': 'F35E5E', 'summary': 'Docker Test - Github build 9.2.1.13:FAILED', 'sections': [{'activityTitle': 'Docker Test - Github build 9.2.1.13:FAILED', 'activitySubtitle': '2023-03-31 11:17:28 - 2023-03-31 11:18:28', 'activityImage': './red.png', 'facts': [{'name': 'Description', 'value': 'Neoload POC Docker'}]}, {'title': 'SLA', 'facts': [{'name': {'TRANSACTION:NeoloaPOC_TransactionExample'}, 'value': {'FAILED'}}, {'name': {'REQUEST:Jmetertest'}, 'value': {'PASSED'}}, {'name': {'TRANSACTION:NeoloaPOC_TransactionExample'}, 'value': {'PASSED'}}]}]}' $TEAMS_WEBHOOK_URL
