@@ -51,5 +51,5 @@ message = {
     }
   ]
 }
-
-print(str(message))
+final_message = str(message).replace("'", "\"")
+print(final_message)
