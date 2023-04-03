@@ -52,4 +52,4 @@ message = {
   ]
 }
 
-print(message)
+print(str(message))
