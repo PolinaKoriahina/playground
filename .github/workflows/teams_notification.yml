@@ -12,3 +12,4 @@ jobs:
       - name: Run Python script
         run: |
           ls
+          python -c 'print(open('report_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.html', 'r', encoding='utf-8').read())'
