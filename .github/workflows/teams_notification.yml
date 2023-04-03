@@ -11,12 +11,12 @@ jobs:
         
       - name: Run Python script
         run: |
-          output=$(python - <<EOF
+          python - <<EOF
           import re
           fname = "report_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.html"
-          print(open(fname, 'r', encoding='utf-8').read())
-          EOF)
-          echo "::set-output name=script_output::$output"
+          export SCRIPT_OUTPUT= re.search("Status: (.*?)<", open(fname, 'r', encoding='utf-8').read())
+          EOF
+          echo "Output of Python script: ${{ env.SCRIPT_OUTPUT }}"
       - name: Send Teams notification
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
