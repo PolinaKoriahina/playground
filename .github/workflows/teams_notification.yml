@@ -19,4 +19,4 @@ jobs:
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
-          curl -H "Content-Type: application/json" -d '$output' $TEAMS_WEBHOOK_URL
+          curl -H "Content-Type: application/json" -d '$script_output' $TEAMS_WEBHOOK_URL
