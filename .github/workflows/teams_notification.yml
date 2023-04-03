@@ -7,14 +7,51 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-          
-      - name: Run Python script
+        uses: actions/checkout@v2     
+        
+      - name: Send Teams notification
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
-          output=$(python - <<EOF
-          import re
-          fname = "./report_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.html"
-          print(re.search("Status: (.*?)<", open(fname, 'r', encoding='utf-8').read()).group(1))
-          EOF)
-          echo "script_output=$output" >> $GITHUB_OUTPUT
-          echo $output
+          curl -H "Content-Type: application/json" -d '{
+  "@type": "MessageCard",
+  "@context": "http://schema.org/extensions",
+  "themeColor": "0076D7",
+  "summary": "Example message summary",
+  "sections": [
+    {
+      "activityTitle": "Example header title",
+      "activitySubtitle": "Example header subtitle",
+      "activityImage": "https://example.com/header-image.png",
+      "facts": [
+        {
+          "name": "Fact 1",
+          "value": "Value 1"
+        },
+        {
+          "name": "Fact 2",
+          "value": "Value 2"
+        }
+      ],
+      "text": "- Bullet 1\n- Bullet 2\n- Bullet 3"
+    },
+    {
+      "title": "Example table title",
+      "facts": [
+        {
+          "name": "Column 1",
+          "value": "Value 1"
+        },
+        {
+          "name": "Column 2",
+          "value": "Value 2"
+        },
+        {
+          "name": "Column 3",
+          "value": "Value 3"
+        }
+      ]
+    }
+  ]
+}
+' $TEAMS_WEBHOOK_URL
