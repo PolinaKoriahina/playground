@@ -18,10 +18,10 @@ test_sla = parsed_json["sla_test"]
 
 if test_status == "FAILED":
   color = "F35E5E"
-  image = "./red.png"
+  image = "red.png"
 else:
   color = "57C478"
-  image = "./green.png"
+  image = "green.png"
 
 sla = []
 for element in test_sla:
