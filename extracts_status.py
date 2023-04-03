@@ -25,7 +25,7 @@ else:
 
 sla = []
 for element in test_sla:
-    sla.append({"name": {element["element"]["category"] + ":" + element["element"]["name"]},"value": {element["status"]}})
+    sla.append({"name": element["element"]["category"] + ":" + element["element"]["name"],"value": element["status"]})
 
 message = {
   "@type": "MessageCard",
