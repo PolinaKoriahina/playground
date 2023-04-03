@@ -12,7 +12,7 @@ with open(fname) as user_file:
 test_name = parsed_json["summary"]["name"]
 test_status = parsed_json["summary"]["qualityStatus"]
 test_start = parsed_json["summary"]["startDateText"]
-test_end = parsed_json["summary"]["endDateText"]s
+test_end = parsed_json["summary"]["endDateText"]
 test_description = parsed_json["summary"]["description"]
 test_sla = parsed_json["sla_test"]
 
