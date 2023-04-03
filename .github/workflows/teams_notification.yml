@@ -6,6 +6,14 @@ jobs:
   send_notification:
     runs-on: ubuntu-latest
     steps:
+      - name: Run Python script
+        run: |
+          python - <<EOF
+          import re
+          fname = "report_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.html"
+          x = re.search("Status: (.*?)<", open(fname, 'r', encoding='utf-8').read())
+          print(x.group(1))
+          EOF
       - name: Send Teams notification
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
