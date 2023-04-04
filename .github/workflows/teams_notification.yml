@@ -12,7 +12,7 @@ jobs:
       - name: Run Python script
         id: message 
         run: |
-          output=$(python -c "from extracts_status import form_message; form_message("raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json"))
+          output=$(python -c "from extracts_status import form_message; form_message('raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json')")
           echo "script_output=$output" >> $GITHUB_OUTPUT
           echo $output
       
