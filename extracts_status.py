@@ -2,54 +2,51 @@
 import re
 import json
 
-fname = "./raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json"
+def form_message(fname):
+  with open(fname) as user_file:
+    parsed_json = json.load(user_file)
 
-import json
+  test_name = parsed_json["summary"]["name"]
+  test_status = parsed_json["summary"]["qualityStatus"]
+  test_start = parsed_json["summary"]["startDateText"]
+  test_end = parsed_json["summary"]["endDateText"]
+  test_description = parsed_json["summary"]["description"]
+  test_sla = parsed_json["sla_test"]
 
-with open(fname) as user_file:
-  parsed_json = json.load(user_file)
+  if test_status == "FAILED":
+    color = "F35E5E"
+    image = "https://github.com/PolinaKoriahina/playground/raw/main/red.png"
+  else:
+    color = "57C478"
+    image = "https://github.com/PolinaKoriahina/playground/raw/main/green.png"
 
-test_name = parsed_json["summary"]["name"]
-test_status = parsed_json["summary"]["qualityStatus"]
-test_start = parsed_json["summary"]["startDateText"]
-test_end = parsed_json["summary"]["endDateText"]
-test_description = parsed_json["summary"]["description"]
-test_sla = parsed_json["sla_test"]
+  sla = []
+  for element in test_sla:
+      sla.append({"name": element["element"]["category"] + ":" + element["element"]["name"],"value": element["status"]})
 
-if test_status == "FAILED":
-  color = "F35E5E"
-  image = "https://github.com/PolinaKoriahina/playground/raw/main/red.png"
-else:
-  color = "57C478"
-  image = "https://github.com/PolinaKoriahina/playground/raw/main/green.png"
-
-sla = []
-for element in test_sla:
-    sla.append({"name": element["element"]["category"] + ":" + element["element"]["name"],"value": element["status"]})
-
-message = {
-  "@type": "MessageCard",
-  "@context": "http://schema.org/extensions",
-  "themeColor": color,
-  "summary": test_name + ":" + test_status,
-  "sections": [
-    {
-      "activityTitle": test_name + ":" + test_status,
-      "activitySubtitle": test_start + " - " + test_end,
-      "activityImage": image,
-      "facts": [
-        {
-          "name": "Description",
-          "value": test_description
-        },
-      ]
-    },
-    {
-      "title": "SLA",
-      "facts":
-      sla
-    }
-  ]
-}
-final_message = str(message).replace("'", "\"")
-print(final_message)
+  message = {
+    "@type": "MessageCard",
+    "@context": "http://schema.org/extensions",
+    "themeColor": color,
+    "summary": test_name + ":" + test_status,
+    "sections": [
+      {
+        "activityTitle": test_name + ":" + test_status,
+        "activitySubtitle": test_start + " - " + test_end,
+        "activityImage": image,
+        "facts": [
+          {
+            "name": "Description",
+            "value": test_description
+          },
+        ]
+      },
+      {
+        "title": "SLA",
+        "facts":
+        sla
+      }
+    ]
+  }
+  final_message = str(message).replace("'", "\"")
+  return(final_message)
