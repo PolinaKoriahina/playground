@@ -10,7 +10,10 @@ jobs:
         uses: actions/checkout@v2   
       
       - name: Send Teams notification
+        id: message
         env:
           TEAMS_WEBHOOK_URL_1: ${{ secrets.TEAMS_WEBHOOK_URL_1 }}
         run: |
-         python -c "import extracts_status; extracts_status.send_mesege('KO','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}', ${TEAMS_WEBHOOK_URL_1})"
+         output=$(python -c "import extracts_status; extracts_status.form_message('KO','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}')")
+         echo "script_output=$output" >> $GITHUB_OUTPUT
+         curl -H "Content-Type: application/json" -d '${{ steps.message.outputs.script_output }}' $TEAMS_WEBHOOK_URL_1
