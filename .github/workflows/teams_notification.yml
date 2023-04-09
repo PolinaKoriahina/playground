@@ -14,6 +14,6 @@ jobs:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL_1 }}
           WORKFLOW_URL: ${{ github.event.workflow_run.url }}
         run: |
-         output=$(python -c "import extracts_status; extracts_status.send_mesege('KO','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','$WORKFLOW_URL')")
+         output=$(python -c "import extracts_status; extracts_status.form_message('KO','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','$WORKFLOW_URL')")
          curl -H "Content-Type: application/json" -d '$output' $TEAMS_WEBHOOK_URL
          
