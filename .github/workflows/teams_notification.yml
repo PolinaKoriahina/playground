@@ -11,10 +11,12 @@ jobs:
       
       - name: Send Teams notification
         id: message
-        env:
-          TEAMS_WEBHOOK_URL_1: ${{ secrets.TEAMS_WEBHOOK_URL_1 }}
         run: |
          output=$(python -c "from extracts_status import form_message; form_message('KO','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}')")
          echo "script_output=$output" >> $GITHUB_OUTPUT
-         echo $output
-         curl -H "Content-Type: application/json" -d $output $TEAMS_WEBHOOK_URL_1
+         
+      - name: Send Teams notification
+        env:
+          TEAMS_WEBHOOK_URL_1: ${{ secrets.TEAMS_WEBHOOK_URL_1 }}
+        run: |
+         curl -H "Content-Type: application/json" -d '${{ steps.message.outputs.script_output }}' $TEAMS_WEBHOOK_URL_1
