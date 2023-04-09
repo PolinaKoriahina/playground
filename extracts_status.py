@@ -2,6 +2,21 @@
 import json
 import requests
 
+def form_sla(sla_json):
+    sla = "<table><thead><tr><th>Category</th><th>Name</th><th>KPI</th><th>operator</th><th>value</th><th>Status</th><th>by value</th></tr></thead><tbody>"
+    for element in sla_json:
+      category = element["element"]["category"]
+      name = element["element"]["name"]
+      KPI = element["kpi"]
+      operator = element["failedThreshold"]["operator"]
+      value = element["value"]
+      Status = element["status"]
+      by_value =element["failedThreshold"]["values"][0]
+
+      sla +=f"<tr><td>{category}</td><td>{name}</td><td>{KPI}</td><td>{operator}</td><td>{value}</td><td>{Status}</td><td>{by_value}</td></tr>"
+    sla += """</tbody></table>"""
+    return(sla)
+
 def form_message(workflow_status, fname, workflow_link):
 
   if workflow_status == 'KO':
@@ -74,18 +89,3 @@ def form_message(workflow_status, fname, workflow_link):
 def send_mesege(workflow_status, fname, workflow_link, webhook):
   response = requests.post(webhook, form_message(workflow_status, fname, workflow_link))
   print(response)
-
-def form_sla(sla_json):
-    sla = "<table><thead><tr><th>Category</th><th>Name</th><th>KPI</th><th>operator</th><th>value</th><th>Status</th><th>by value</th></tr></thead><tbody>"
-    for element in sla_json:
-      category = element["element"]["category"]
-      name = element["element"]["name"]
-      KPI = element["kpi"]
-      operator = element["failedThreshold"]["operator"]
-      value = element["value"]
-      Status = element["status"]
-      by_value =element["failedThreshold"]["values"][0]
-
-      sla +=f"<tr><td>{category}</td><td>{name}</td><td>{KPI}</td><td>{operator}</td><td>{value}</td><td>{Status}</td><td>{by_value}</td></tr>"
-    sla += """</tbody></table>"""
-    return(sla)
