@@ -14,4 +14,5 @@ jobs:
           TEAMS_WEBHOOK_URL_1: ${{ secrets.TEAMS_WEBHOOK_URL_1 }}
         run: |
          output=$(python -c "import extracts_status; extracts_status.form_message('KO','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','${{ github.event.workflow_run.url }}')")
+         echo $output
          
