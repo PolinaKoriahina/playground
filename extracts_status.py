@@ -84,7 +84,7 @@ def form_message(workflow_status, fname, workflow_link):
     }
 
   final_message = str(message).replace("'", "\"")
-  return(final_message)
+  print(final_message)
 
 def send_mesege(workflow_status, fname, workflow_link, webhook):
   response = requests.post(webhook, form_message(workflow_status, fname, workflow_link))
