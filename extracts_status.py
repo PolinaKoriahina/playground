@@ -4,7 +4,7 @@ import requests
 
 def form_message(workflow_status, fname, workflow_link):
 
-  if workflow_status == "KO":
+  if workflow_status == 'KO':
     message = {
             "@context": "http://schema.org/extensions",
             "@type": "MessageCard",
