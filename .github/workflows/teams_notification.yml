@@ -11,6 +11,6 @@ jobs:
       
       - name: Send Teams notification
         env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL_1 }}
         run: |
          python -c "import extracts_status; send_mesege('OK','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json',${{ github.event.workflow_run.url }}, $TEAMS_WEBHOOK_URL_1)
