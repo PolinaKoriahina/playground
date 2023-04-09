@@ -71,9 +71,9 @@ def form_message(workflow_status, fname, workflow_link):
   final_message = str(message).replace("'", "\"")
   return(final_message)
 
-# def send_mesege(workflow_status, fname, workflow_link, webhook):
-#   response = requests.post(webhook, form_message(workflow_status, fname, workflow_link))
-#   print(response)
+def send_mesege(workflow_status, fname, workflow_link, webhook):
+  response = requests.post(webhook, form_message(workflow_status, fname, workflow_link))
+  print(response)
 
 def form_sla(sla_json):
     sla = "<table><thead><tr><th>Category</th><th>Name</th><th>KPI</th><th>operator</th><th>value</th><th>Status</th><th>by value</th></tr></thead><tbody>"
