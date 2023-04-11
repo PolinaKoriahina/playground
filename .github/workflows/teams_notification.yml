@@ -1,6 +1,13 @@
 name: Send Teams notification
 
-on: [workflow_dispatch]
+on: 
+  workflow_dispatch:
+    inputs:
+      test_name: 
+        description: 'name'
+        required: true
+        type: string
+        default: 'service'
 
 jobs:
   send_notification:
@@ -9,10 +16,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2   
       
-      - name: Send Teams notification
-        id: message
-        env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+      - name: "Set up webhook"
         run: |
-         python -c "from notification.extracts_status import send_mesege; send_mesege('OK','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}','${TEAMS_WEBHOOK_URL}')"
-         
+          if [ "${{ inputs.test_name }}" = "service" ]; then
+            export webhook_id="7bb78fb627534affb6bae68b60da825b"
+          else
+            export webhook_id="7a6b9a6798224773adce577dff2f98f7"
+          fi
+        env:
+          TEAMS_WEBHOOK_URL: ${{ env.webhook_id }}
+          
+      - name: "Print"
+        run: echo $TEAMS_WEBHOOK_URL
