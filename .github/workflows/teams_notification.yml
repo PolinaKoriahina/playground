@@ -30,4 +30,6 @@ jobs:
           echo "webhook_id=$webhook_id" >> $GITHUB_ENV
           
       - name: "Print"
-        run: echo ${{ env.webhook_id }}
+        env:
+          Some_Hook: "texttext/${{ env.webhook_id }}/texttext"
+        run: echo ${{ env.Some_Hook }}
