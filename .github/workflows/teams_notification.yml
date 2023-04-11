@@ -12,7 +12,7 @@ jobs:
       - name: Send Teams notification
         id: message
         env:
-          TEAMS_WEBHOOK_URL_1: ${{ secrets.TEAMS_WEBHOOK_URL_1 }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
-         python -c "from extracts_status import send_mesege; send_mesege('OK','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}','${TEAMS_WEBHOOK_URL_1}')"
+         python -c "from notification.extracts_status import send_mesege; send_mesege('OK','raw_data_dc3078d8-ee29-4411-b4ef-fa0f0f0203f2.json','https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}','${TEAMS_WEBHOOK_URL}')"
          
