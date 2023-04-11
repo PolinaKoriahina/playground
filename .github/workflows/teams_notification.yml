@@ -19,10 +19,13 @@ jobs:
       - name: "Set up webhook"
         run: |
           if [ "${{ inputs.test_name }}" = "service" ]; then
-            webhook_id="7bb78fb627534affb6bae68b60da825b"
+            webhook_id="111"
           else
-            if [ "${{ inputs.test_name }}" = "test" ]; then
-              webhook_id="7a6b9a6798224773adce577dff2f98f7"
+            if [ "${{ github.event_name }}" == "pull_request" ]; then
+              webhook_id="222"
+            else
+              webhook_id="333"
+            fi
           fi
           echo "webhook_id=$webhook_id" >> $GITHUB_ENV
           
