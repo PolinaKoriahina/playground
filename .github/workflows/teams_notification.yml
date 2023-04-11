@@ -21,7 +21,7 @@ jobs:
           if [ "${{ inputs.test_name }}" = "service" ]; then
             webhook_id="111"
           else
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
+            if [ "${{ inputs.test_name }}" = "test"  ]; then
               webhook_id="222"
             else
               webhook_id="333"
