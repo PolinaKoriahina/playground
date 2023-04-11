@@ -19,12 +19,11 @@ jobs:
       - name: "Set up webhook"
         run: |
           if [ "${{ inputs.test_name }}" = "service" ]; then
-            export webhook_id="7bb78fb627534affb6bae68b60da825b"
+            webhook_id="7bb78fb627534affb6bae68b60da825b"
           else
-            export webhook_id="7a6b9a6798224773adce577dff2f98f7"
+            webhook_id="7a6b9a6798224773adce577dff2f98f7"
           fi
-        env:
-          TEAMS_WEBHOOK_URL: ${{ env.webhook_id }}
+          echo "webhook_id=$webhook_id" >> $GITHUB_ENV
           
       - name: "Print"
-        run: echo $TEAMS_WEBHOOK_URL
+        run: echo ${{ env.webhook_id }}
